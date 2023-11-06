@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Survey Form</title>
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body>
+    
+<h1 class="heading">Customer Survey Form</h1>
+    
+<form action="" id="survey-form">
+<div class="formItem"><label for="first-name" >First Name:</label>
+<input type="text" name="Farst Name" id="first-name"  placeholder="First Name"></div>
+<div class="formItem"><label for="last-name" >Last Name:</label>
+<input type="text" name="Last Name" id="last-name" placeholder="Last Name" required></div>
+<div class="formItem"><label for="date-of-birth" >Date of Birth:</label>
+    <input type="date" name="date-of-birth" id="date-of-birth" required></div>
+    <div class="formItem"><label for="country" >Country:</label>
+    <select   class="lable1" name="country" id="country" required>
+      <option value="">Select a country</option>
+    <option value="India">India</option>
+    <option value="United States">United States</option>
+    <option value="United Kingdom">United Kingdom</option>
+<option value="China">China</option>
+<option value="Japan">Japan</option>
+</select></div>
+<div class="formItem"><label for="Gender" >Gender:</label>
+    <input type="radio" name="Gender" id="gender" value="male" required> Male
+    <input type="radio" name="Gender" id="gender" value="female" required> Female
+</div>
+<div class="formItem"><label for="profession" >Profession:</label>
+    <input type="text" name="Profession" id="profession"  placeholder="Profession" required></div>
+    <div class="formItem">
+    <label for="email"  >Email:</label>
+    <input type="email" name="email" id="email" required>
+ </div>
+ <div class="formItem"><label for="mobile-number"  >Mobile Number:</label>
+    <input type="tel" name="mobile-number" id="mobile-number" required>
+ </div>
+ <div class="formItem"><input type="submit" value="Submit">
+    <input type="reset" value="Reset">
+</div>
+  </form>
+</div>
+</div>
+  <div id="popup" style="display: none;">
+
+    <h2>Survey Results</h2>
+
+    <ul id="survey-results"></ul>
+
+    <button id="close-popup">Close</button>
+
+  </div>
+
+
+  <script>
+
+    const surveyForm = document.getElementById('survey-form');
+    const popup = document.getElementById('popup');
+    const closePopupButton = document.getElementById('close-popup');
+    const surveyResultsList = document.getElementById('survey-results');
+
+    surveyForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      // Validate the form fields.
+      if (!surveyForm.checkValidity()) {
+        return;
+      }
+
+      // Get the form values.
+      const formData = new FormData(surveyForm);
+
+      // Create a popup to display the survey results.
+      popup.style.display = 'block';
+
+      // Clear the survey results list.
+      surveyResultsList.innerHTML = '';
+
+      // Iterate over the form data and add each item to the survey results list.
+      for (const [name, value] of formData.entries()) {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${name}: ${value}`;
+        surveyResultsList.appendChild(listItem);
+      }
+    });
+
+    closePopupButton.addEventListener('click', function() {
+      popup.style.display = 'none';
+
+      // Reset the form.
+      surveyForm.reset();
+    });
+
+  </script>
+</body>
+</html>
